@@ -169,26 +169,54 @@ export function FieldRow({
   suffix,
   isDropdown,
   keyboardType = "default",
+  value,
+  onChangeText,
+  onPress,
 }: {
   icon: React.ReactNode;
   placeholder: string;
   suffix?: string;
   isDropdown?: boolean;
   keyboardType?: any;
+  value?: string;
+  onChangeText?: (text: string) => void;
+  onPress?: () => void;
 }) {
-  return (
+  const content = (
     <View className="flex-row items-center border-b border-gray-200 py-[14px]">
       <View className="mr-3">{icon}</View>
-      <TextInput
-        className="flex-1 text-[15px] text-gray-700"
-        placeholder={placeholder}
-        placeholderTextColor="#9ca3af"
-        keyboardType={keyboardType}
-      />
+      {onPress ? (
+        <Text
+          className={`flex-1 text-[15px] ${
+            value ? "text-gray-900" : "text-gray-400"
+          }`}
+        >
+          {value || placeholder}
+        </Text>
+      ) : (
+        <TextInput
+          className="flex-1 text-[15px] text-gray-700"
+          placeholder={placeholder}
+          placeholderTextColor="#9ca3af"
+          keyboardType={keyboardType}
+          value={value}
+          onChangeText={onChangeText}
+        />
+      )}
       {suffix && (
         <Text className="text-gray-400 text-[14px] ml-2">{suffix}</Text>
       )}
       {isDropdown && <Feather name="chevron-down" size={16} color="#9ca3af" />}
     </View>
   );
+
+  if (onPress) {
+    return (
+      <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+        {content}
+      </TouchableOpacity>
+    );
+  }
+
+  return content;
 }

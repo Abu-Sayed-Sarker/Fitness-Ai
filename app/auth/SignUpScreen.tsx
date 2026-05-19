@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useForm, Controller } from "react-hook-form";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import bgImage from "../../assets/images/main-screen/Rectangle 5815.png";
 import {
@@ -25,22 +26,28 @@ import {
 
 const { height } = Dimensions.get("window");
 
+type SignUpFormValues = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 export default function SignUpScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const { control, handleSubmit } = useForm<SignUpFormValues>({
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
 
   const router = useRouter();
 
-  const onSubmit = () => {
-    console.log("Data", {
-      email,
-      password,
-      confirmPassword,
-    });
+  const onSubmit = (data: SignUpFormValues) => {
+    console.log("Data", data);
     router.push("/auth/CompleteProfileScreen");
   };
 
@@ -120,14 +127,20 @@ export default function SignUpScreen() {
                 color="#a0aec0"
                 style={{ marginRight: 8 }}
               />
-              <TextInput
-                className="flex-1 text-gray-700 text-[15px]"
-                placeholder="Enter Your Email"
-                placeholderTextColor="#a0aec0"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                value={email}
-                onChangeText={setEmail}
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    className="flex-1 text-gray-700 text-[15px]"
+                    placeholder="Enter Your Email"
+                    placeholderTextColor="#a0aec0"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    value={value}
+                    onChangeText={onChange}
+                  />
+                )}
               />
             </View>
           </FadeSlideIn>
@@ -141,13 +154,19 @@ export default function SignUpScreen() {
                 color="#a0aec0"
                 style={{ marginRight: 8 }}
               />
-              <TextInput
-                className="flex-1 text-gray-700 text-[15px]"
-                placeholder="Create Password"
-                placeholderTextColor="#a0aec0"
-                secureTextEntry={!showPassword}
-                value={password}
-                onChangeText={setPassword}
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    className="flex-1 text-gray-700 text-[15px]"
+                    placeholder="Create Password"
+                    placeholderTextColor="#a0aec0"
+                    secureTextEntry={!showPassword}
+                    value={value}
+                    onChangeText={onChange}
+                  />
+                )}
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                 <Ionicons
@@ -168,13 +187,19 @@ export default function SignUpScreen() {
                 color="#a0aec0"
                 style={{ marginRight: 8 }}
               />
-              <TextInput
-                className="flex-1 text-gray-700 text-[15px]"
-                placeholder="Confirm Password"
-                placeholderTextColor="#a0aec0"
-                secureTextEntry={!showConfirm}
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
+              <Controller
+                control={control}
+                name="confirmPassword"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    className="flex-1 text-gray-700 text-[15px]"
+                    placeholder="Confirm Password"
+                    placeholderTextColor="#a0aec0"
+                    secureTextEntry={!showConfirm}
+                    value={value}
+                    onChangeText={onChange}
+                  />
+                )}
               />
               <TouchableOpacity onPress={() => setShowConfirm(!showConfirm)}>
                 <Ionicons
@@ -211,7 +236,7 @@ export default function SignUpScreen() {
             <AnimatedButton
               className="bg-[#1a1a2e] rounded-full py-[15px] items-center justify-center mb-5"
               activeScale={0.95}
-              onPress={onSubmit}
+              onPress={handleSubmit(onSubmit)}
             >
               <Text className="text-white text-[16px] font-semibold tracking-wide">
                 Sign Up
