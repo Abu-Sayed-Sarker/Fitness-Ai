@@ -19,6 +19,10 @@ export default function RootLayout() {
           name="auth/CompleteProfileScreen"
           options={{ headerShown: false }}
         />
+         <Stack.Screen
+          name="auth/SignInScreen"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </KeyboardProvider>
   );

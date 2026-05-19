@@ -29,18 +29,15 @@ const { height } = Dimensions.get("window");
 type SignUpFormValues = {
   email: string;
   password: string;
-  confirmPassword: string;
 };
 
 export default function SignUpScreen() {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
 
   const { control, handleSubmit } = useForm<SignUpFormValues>({
     defaultValues: {
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
@@ -112,9 +109,9 @@ export default function SignUpScreen() {
         >
           {/* Heading */}
           <FadeSlideIn delay={500}>
-            <Text className="text-gray-500 text-[15px]">Hey there,</Text>
-            <Text className="text-black text-[22px] font-bold mt-0.5 mb-7">
-              Create your account
+            <Text className="text-gray-500 text-xl">Hey there,</Text>
+            <Text className="text-black text-3xl font-bold mt-0.5 mb-7">
+              Welcome Back
             </Text>
           </FadeSlideIn>
 
@@ -178,54 +175,13 @@ export default function SignUpScreen() {
             </View>
           </FadeSlideIn>
 
-          {/* ── Confirm Password field ── */}
-          <FadeSlideIn delay={860}>
-            <View className="flex-row items-center border-b border-gray-200 pb-3 mb-6">
-              <MaterialCommunityIcons
-                name="key-outline"
-                size={18}
-                color="#a0aec0"
-                style={{ marginRight: 8 }}
-              />
-              <Controller
-                control={control}
-                name="confirmPassword"
-                render={({ field: { onChange, value } }) => (
-                  <TextInput
-                    className="flex-1 text-gray-700 text-[15px]"
-                    placeholder="Confirm Password"
-                    placeholderTextColor="#a0aec0"
-                    secureTextEntry={!showConfirm}
-                    value={value}
-                    onChangeText={onChange}
-                  />
-                )}
-              />
-              <TouchableOpacity onPress={() => setShowConfirm(!showConfirm)}>
-                <Ionicons
-                  name={showConfirm ? "eye-outline" : "eye-off-outline"}
-                  size={18}
-                  color="#a0aec0"
-                />
-              </TouchableOpacity>
-            </View>
-          </FadeSlideIn>
-
           {/* ── Terms ── */}
           <FadeSlideIn delay={960}>
-            <View className="flex-row flex-wrap mb-5">
-              <Text className="text-gray-400 text-[11px]">
-                By Singing up You're agree with our{" "}
-              </Text>
+            <View className="flex-row flex-wrap justify-end mb-5">
+              {/* /// forgot password */}
               <TouchableOpacity>
                 <Text className="text-[#4a90d9] text-[11px]">
-                  Terms &amp; Condition
-                </Text>
-              </TouchableOpacity>
-              <Text className="text-gray-400 text-[11px]"> and </Text>
-              <TouchableOpacity>
-                <Text className="text-[#4a90d9] text-[11px]">
-                  Privacy Policy
+                  Forgot your password ?
                 </Text>
               </TouchableOpacity>
             </View>
@@ -239,7 +195,7 @@ export default function SignUpScreen() {
               onPress={handleSubmit(onSubmit)}
             >
               <Text className="text-white text-[16px] font-semibold tracking-wide">
-                Sign Up
+                Login
               </Text>
             </AnimatedButton>
           </FadeSlideIn>
@@ -250,13 +206,13 @@ export default function SignUpScreen() {
               {/* Log in link */}
               <View className="flex-row items-center justify-center mb-1">
                 <Text className="text-gray-400 text-[13px]">
-                  Joined us before?{" "}
+                  Don't have an account?{" "}
                 </Text>
                 <TouchableOpacity
-                  onPress={() => router.push("/auth/SignInScreen")}
+                  onPress={() => router.push("/auth/SignUpScreen")}
                 >
                   <Text className="text-[#4a90d9] text-[13px] font-medium">
-                    Log in
+                    Register
                   </Text>
                 </TouchableOpacity>
               </View>
