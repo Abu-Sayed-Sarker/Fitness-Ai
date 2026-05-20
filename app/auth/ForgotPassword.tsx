@@ -20,6 +20,10 @@ const ForgotPassword = () => {
   });
   const onSubmit = (data: ForgotPasswordFormValues) => {
     console.log("Forgot password data:", data);
+    router.push({
+      pathname: "/auth/VerifyOtp",
+      params: { email: data.email },
+    });
   };
   return (
     <SafeAreaView className="flex-1 bg-white">

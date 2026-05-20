@@ -27,6 +27,11 @@ export default function RootLayout() {
           name="auth/ForgotPassword"
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="auth/VerifyOtp" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="auth/ResetPasswordScreen"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </KeyboardProvider>
   );
