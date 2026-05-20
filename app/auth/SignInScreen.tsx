@@ -179,7 +179,9 @@ export default function SignUpScreen() {
           <FadeSlideIn delay={960}>
             <View className="flex-row flex-wrap justify-end mb-5">
               {/* /// forgot password */}
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => router.push("/auth/ForgotPassword")}
+              >
                 <Text className="text-[#4a90d9] text-[11px]">
                   Forgot your password ?
                 </Text>
