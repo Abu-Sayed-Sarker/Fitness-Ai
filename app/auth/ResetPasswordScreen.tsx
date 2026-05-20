@@ -76,101 +76,102 @@ const ResetPasswordScreen = () => {
   }));
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <KeyboardAwareScrollView
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 40 }}
-        className="p-4"
-        bottomOffset={16}
-      >
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color="black" />
-        </TouchableOpacity>
-
-        <Text className="text-black text-[28px] font-semibold mt-20 text-center">
-          Reset Password
-        </Text>
-        <Text className="text-gray-500 text-[16px] mb-10 text-center">
-          Please enter your new password
-        </Text>
-
-        <FadeSlideIn delay={200}>
-          <View className="flex-row items-center border-b border-gray-200 pb-3 mb-5">
-            <MaterialCommunityIcons
-              name="key-outline"
-              size={18}
-              color="#a0aec0"
-              style={{ marginRight: 8 }}
-            />
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  className="flex-1 text-gray-700 text-[15px]"
-                  placeholder="Create Password"
-                  placeholderTextColor="#a0aec0"
-                  secureTextEntry={!showPassword}
-                  value={value}
-                  onChangeText={onChange}
-                />
-              )}
-            />
-            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              <Ionicons
-                name={showPassword ? "eye-outline" : "eye-off-outline"}
-                size={18}
-                color="#a0aec0"
-              />
-            </TouchableOpacity>
-          </View>
-        </FadeSlideIn>
-
-        {/* ── Confirm Password field ── */}
-        <FadeSlideIn delay={320}>
-          <View className="flex-row items-center border-b border-gray-200 pb-3 mb-6">
-            <MaterialCommunityIcons
-              name="key-outline"
-              size={18}
-              color="#a0aec0"
-              style={{ marginRight: 8 }}
-            />
-            <Controller
-              control={control}
-              name="confirmPassword"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  className="flex-1 text-gray-700 text-[15px]"
-                  placeholder="Confirm Password"
-                  placeholderTextColor="#a0aec0"
-                  secureTextEntry={!showConfirm}
-                  value={value}
-                  onChangeText={onChange}
-                />
-              )}
-            />
-            <TouchableOpacity onPress={() => setShowConfirm(!showConfirm)}>
-              <Ionicons
-                name={showConfirm ? "eye-outline" : "eye-off-outline"}
-                size={18}
-                color="#a0aec0"
-              />
-            </TouchableOpacity>
-          </View>
-        </FadeSlideIn>
-
-        <AnimatedButton
-          onPress={handleSubmit(onSubmit)}
-          className="bg-black p-4 rounded-xl items-center justify-center mt-4"
-          activeScale={0.97}
+    <>
+      <SafeAreaView className="flex-1 bg-white">
+        <KeyboardAwareScrollView
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 40 }}
+          className="p-4"
+          bottomOffset={16}
         >
-          <Text className="text-white text-[16px] font-semibold text-center">
+          <TouchableOpacity onPress={() => router.back()}>
+            <Ionicons name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
+
+          <Text className="text-black text-[28px] font-semibold mt-20 text-center">
             Reset Password
           </Text>
-        </AnimatedButton>
-      </KeyboardAwareScrollView>
+          <Text className="text-gray-500 text-[16px] mb-10 text-center">
+            Please enter your new password
+          </Text>
 
+          <FadeSlideIn delay={200}>
+            <View className="flex-row items-center border-b border-gray-200 pb-3 mb-5">
+              <MaterialCommunityIcons
+                name="key-outline"
+                size={18}
+                color="#a0aec0"
+                style={{ marginRight: 8 }}
+              />
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    className="flex-1 text-gray-700 text-[15px]"
+                    placeholder="Create Password"
+                    placeholderTextColor="#a0aec0"
+                    secureTextEntry={!showPassword}
+                    value={value}
+                    onChangeText={onChange}
+                  />
+                )}
+              />
+              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                <Ionicons
+                  name={showPassword ? "eye-outline" : "eye-off-outline"}
+                  size={18}
+                  color="#a0aec0"
+                />
+              </TouchableOpacity>
+            </View>
+          </FadeSlideIn>
+
+          {/* ── Confirm Password field ── */}
+          <FadeSlideIn delay={320}>
+            <View className="flex-row items-center border-b border-gray-200 pb-3 mb-6">
+              <MaterialCommunityIcons
+                name="key-outline"
+                size={18}
+                color="#a0aec0"
+                style={{ marginRight: 8 }}
+              />
+              <Controller
+                control={control}
+                name="confirmPassword"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    className="flex-1 text-gray-700 text-[15px]"
+                    placeholder="Confirm Password"
+                    placeholderTextColor="#a0aec0"
+                    secureTextEntry={!showConfirm}
+                    value={value}
+                    onChangeText={onChange}
+                  />
+                )}
+              />
+              <TouchableOpacity onPress={() => setShowConfirm(!showConfirm)}>
+                <Ionicons
+                  name={showConfirm ? "eye-outline" : "eye-off-outline"}
+                  size={18}
+                  color="#a0aec0"
+                />
+              </TouchableOpacity>
+            </View>
+          </FadeSlideIn>
+
+          <AnimatedButton
+            onPress={handleSubmit(onSubmit)}
+            className="bg-black p-4 rounded-xl items-center justify-center mt-4"
+            activeScale={0.97}
+          >
+            <Text className="text-white text-[16px] font-semibold text-center">
+              Reset Password
+            </Text>
+          </AnimatedButton>
+        </KeyboardAwareScrollView>
+      </SafeAreaView>
       {/* Success Modal */}
       <Modal visible={modalVisible} transparent animationType="none">
         <Animated.View
@@ -180,7 +181,7 @@ const ResetPasswordScreen = () => {
               backgroundColor: "rgba(0, 0, 0, 0.6)",
               justifyContent: "center",
               alignItems: "center",
-              padding: 24,
+              //   padding: 24,
             },
             backdropStyle,
           ]}
@@ -230,7 +231,7 @@ const ResetPasswordScreen = () => {
           </Animated.View>
         </Animated.View>
       </Modal>
-    </SafeAreaView>
+    </>
   );
 };
 
