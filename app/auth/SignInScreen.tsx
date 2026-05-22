@@ -45,7 +45,7 @@ export default function SignUpScreen() {
 
   const onSubmit = (data: SignUpFormValues) => {
     console.log("Data", data);
-    router.push("/auth/CompleteProfileScreen");
+    router.replace("/main");
   };
 
   return (
